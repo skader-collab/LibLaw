@@ -1,54 +1,96 @@
-# React + TypeScript + Vite
+# LibLaw - AI-Powered Legal Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LibLaw is a modern web application designed to make legal information accessible to everyone. Built with React, TypeScript, and Tailwind CSS, it provides an intuitive interface for users to get answers to their legal questions through AI-powered assistance.
 
-Currently, two official plugins are available:
+![LibLaw Screenshot](public/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **AI-Powered Legal Chat**: Get instant answers to your legal questions in plain English
+- **Legal Topics Explorer**: Browse through various legal categories and common issues
+- **Responsive Design**: Seamless experience across all devices
+- **Modern UI**: Clean and professional interface with Tailwind CSS
+- **Accessibility**: WCAG-compliant components for inclusive user experience
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- React 19
+- TypeScript
+- Vite 6
+- Tailwind CSS
+- React Router DOM 7
+- Heroicons
+
+## 📋 Prerequisites
+
+- Node.js (>= 18.18.0)
+- npm or yarn
+
+## 🔧 Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/skader-collab/LibLaw.git
+cd LibLaw
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5174`
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   └── layout/
+│       ├── Footer.tsx
+│       └── Navbar.tsx
+├── pages/
+│   ├── HomePage.tsx
+│   ├── ChatPage.tsx
+│   ├── TopicsPage.tsx
+│   └── AboutPage.tsx
+└── assets/
+```
+
+## 📱 Pages
+
+- **Home**: Landing page with search functionality
+- **Chat**: AI-powered legal assistant interface
+- **Topics**: Browse different legal categories
+- **About**: Information about LibLaw and legal disclaimers
+
+## 🔒 Legal Disclaimer
+
+LibLaw provides legal information but should not be considered as legal advice. For specific legal issues, please consult with a qualified legal professional.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👥 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📞 Contact
+
+Email: contact@liblaw.com
+
+## 🙏 Acknowledgments
+
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Heroicons](https://heroicons.com/)
+- [React Router](https://reactrouter.com/)
