@@ -12,13 +12,19 @@ const Navbar = () => {
     { to: "/about", label: "About" },
   ];
 
-  return (
-    <nav className="bg-white shadow-md">
+  return (    <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-primary">
-              LibLaw
+            <Link to="/" className="flex items-center gap-2">
+              <img 
+                src="/liblaw.jpeg" 
+                alt="LibLaw Logo" 
+                className="h-10 w-10 object-contain rounded"
+              />
+              <span className="text-2xl font-bold text-primary">
+                LibLaw
+              </span>
             </Link>
           </div>
           

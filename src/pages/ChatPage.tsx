@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PaperAirplaneIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-import styles from './ChatPage.module.css';
 
 interface ChatMessage {
   type: 'user' | 'ai';
@@ -56,23 +55,28 @@ const ChatPage = () => {
     }
   };
 
-  return (
-    <div className={styles.chatContainer}>
+  return (    <div className="max-w-3xl mx-auto px-4 pt-2">
       {error && (
-        <div className={styles.error}>
+        <div className="flex items-center gap-2 p-3 mb-2 bg-red-50 text-red-700 rounded-lg">
           <ExclamationCircleIcon className="h-5 w-5" />
           <span>{error}</span>
         </div>
       )}
-      
-      <div className={styles.chatWrapper}>
-        <div className={styles.chatMessages}>
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="h-[calc(100vh-120px)] overflow-y-auto p-2 space-y-2">
+            <p className="text-sm">Ask your legal question below:</p>
           {chatHistory.map((chat, index) => (
             <div
               key={index}
-              className={`${styles.messageRow} ${styles[chat.type]}`}
+              className={`flex ${chat.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className={`${styles.message} ${styles[chat.type]}`}>
+              <div
+                className={`max-w-[80%] rounded-lg p-3 ${
+                  chat.type === 'user'
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 text-gray-800'
+                }`}
+              >
                 {chat.content}
                 <div className="text-xs opacity-50 mt-1">
                   {chat.timestamp.toLocaleTimeString()}
@@ -81,31 +85,31 @@ const ChatPage = () => {
             </div>
           ))}
           {isLoading && (
-            <div className={styles.messageRow}>
-              <div className={styles.loadingDots}>
-                <div className={styles.dot} />
-                <div className={styles.dot} />
-                <div className={styles.dot} />
+            <div className="flex justify-start">
+              <div className="bg-gray-100 rounded-lg p-3 flex space-x-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]" />
               </div>
             </div>
           )}
           <div ref={chatEndRef} />
         </div>
         
-        <form onSubmit={handleSubmit} className={styles.inputForm}>
-          <div className={styles.inputWrapper}>
+        <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4">
+          <div className="flex gap-2">
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your legal question..."
-              className={styles.input}
+              className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               aria-label="Legal question input"
               disabled={isLoading}
             />
             <button
               type="submit"
-              className={styles.sendButton}
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50"
               disabled={isLoading}
               aria-label="Send message"
             >
