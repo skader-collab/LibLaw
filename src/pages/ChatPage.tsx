@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PaperAirplaneIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import axios from 'axios';
 
 interface ChatMessage {
   type: 'user' | 'ai';
@@ -36,35 +37,44 @@ const ChatPage = () => {
 
     // Add user message to chat
     setChatHistory(prev => [...prev, { type: 'user', content: message, timestamp }]);
-    setIsLoading(true);
-
-    try {
-      // Simulate AI response - In production, this would be replaced with an actual API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsLoading(true);    
+    try {      const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
+        question: message
+      }, {
+        timeout: 60000, // 60 second timeout
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       
       setChatHistory(prev => [...prev, {
         type: 'ai',
-        content: 'This is a simulated AI response. In the actual implementation, this would be replaced with a real AI-generated response based on your legal question.',
+        content: response.data.response,
         timestamp: new Date()
       }]);
-    } catch (err) {
-      setError('Failed to get response. Please try again.');
+    } catch (err: any) {
+      if (err.code === 'ECONNABORTED' || err.response?.status === 408) {
+        setError('Request timed out. Please try again with a shorter question.');
+      } else {
+        setError(`Failed to get response: ${err.response?.data?.error || err.message || 'Please try again.'}`);
+      }
     } finally {
       setIsLoading(false);
       setMessage('');
     }
   };
 
-  return (    <div className="max-w-3xl mx-auto px-4 pt-2">
+  return (
+    <div className="max-w-3xl mx-auto px-4 pt-2">
       {error && (
         <div className="flex items-center gap-2 p-3 mb-2 bg-red-50 text-red-700 rounded-lg">
           <ExclamationCircleIcon className="h-5 w-5" />
           <span>{error}</span>
         </div>
       )}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="h-[calc(100vh-120px)] overflow-y-auto p-2 space-y-2">
-            <p className="text-sm">Ask your legal question below:</p>
+          <p className="text-sm">Ask your legal question below:</p>
           {chatHistory.map((chat, index) => (
             <div
               key={index}
